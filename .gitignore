@@ -106,8 +106,15 @@ ENV/
 
 # react native
 __test__
-node_modules
+build/
+node_modules/
 .expo
+
+.cache/
+.env
+bin
+include
+lib
 
 # Variables
 config.py
