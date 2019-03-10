@@ -51,6 +51,7 @@ def retriever_emails():
                 # print(message.body.plain)
                 # print(message.body.html)
                 # print(message.attachments)
+		
 
                 # print(message.keys())
 
@@ -61,7 +62,7 @@ def retriever_emails():
 
                 emails.append(email)
 
-        # print(json.dumps(emails))
+        print(json.dumps(emails))
 
         return json.dumps(emails)
 
@@ -71,15 +72,6 @@ def retriever_emails():
 
 @app.route("/send-email", methods=['POST'])
 def send_email():
-    # data = request.json
-
-    # example = {
-    #     'id': data['id'],
-    #     'title': data['title'],
-    #     'description': data['description'],
-    #     'done': data['done'],
-    # }
-
     mail = Mail(
         host=config.SMTP_HOST,
         port=config.SMTP_PORT,
@@ -104,8 +96,6 @@ def send_email():
     msg.rcpt_options = []
 
     mail.send(msg)
-
-    # print("Successfully Send")
 
     # return json.dumps(example)
     return "Successfully Sent"

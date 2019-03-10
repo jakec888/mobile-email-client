@@ -104,5 +104,8 @@ ENV/
 .serverless/
 .requirements/
 
+# react native
+__test__
+
 # Variables
 config.py
