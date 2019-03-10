@@ -24,9 +24,15 @@ tasks = [
 ]
 
 
+@app.route("/", methods=["GET"])
+def index():
+    return "Working"
+
+
 @app.route("/retriever-emails", methods=['GET'])
 def retriever_emails():
     try:
+
         emails = []
 
         with Retriever(
@@ -51,7 +57,6 @@ def retriever_emails():
                 # print(message.body.plain)
                 # print(message.body.html)
                 # print(message.attachments)
-		
 
                 # print(message.keys())
 
