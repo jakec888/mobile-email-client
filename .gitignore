@@ -118,3 +118,6 @@ lib
 
 # Variables
 config.py
+
+# VS Code
+.vscode
