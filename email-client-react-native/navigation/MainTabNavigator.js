@@ -9,6 +9,7 @@ import TabBarIcon from "../components/TabBarIcon";
 import InboxScreen from "../screens/InboxScreen";
 import ComposeScreen from "../screens/ComposeScreen";
 import AllMailScreen from "../screens/AllMailScreen";
+import EmailScreen from "../screens/EmailScreen";
 
 // const HomeStack = createStackNavigator({
 //   Home: HomeScreen
@@ -57,7 +58,8 @@ import AllMailScreen from "../screens/AllMailScreen";
 // };
 
 const InboxStack = createStackNavigator({
-  Inbox: InboxScreen
+  Inbox: InboxScreen,
+  Email: EmailScreen
 });
 
 InboxStack.navigationOptions = {

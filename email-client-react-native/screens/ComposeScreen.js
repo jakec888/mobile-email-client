@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default class ComposeScreen extends React.Component {
   static navigationOptions = {
-    header: null
+    title: "Compose Email"
   };
 
   render() {
