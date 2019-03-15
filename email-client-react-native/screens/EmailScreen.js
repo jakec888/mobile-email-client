@@ -1,23 +1,24 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+import HTMLView from "react-native-htmlview";
 
 export default class EmailScreen extends React.Component {
-  // static navigationOptions = {
-  //   title: "Email Screen"
-  // };
-
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam("name", "Email Message")
+      title: navigation.getParam("subject", "Email Message")
     };
   };
 
   render() {
     const { navigation } = this.props;
 
-    const name = navigation.getParam("name", "No Name");
-
-    console.log(name);
+    const subject = navigation.getParam("subject", "No Subject");
+    const folder = navigation.getParam("folder", "Not In A Folder");
+    const sent_from = navigation.getParam("sent_from", "No Sent From Address");
+    const sent_to = navigation.getParam("sent_to", "No Sent To Address");
+    const date = navigation.getParam("date", "No Date");
+    const plain = navigation.getParam("plain", null);
+    const html = navigation.getParam("html", null);
 
     return (
       <View style={styles.container}>
@@ -26,8 +27,16 @@ export default class EmailScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}
         >
           <View style={styles.getStartedContainer}>
-            <Text style={styles.getStartedText}>This Is The Email Page</Text>
-            <Text style={styles.getStartedText}>{this.props.name}</Text>
+            <Text style={styles.getStartedText}>Subject: {subject}</Text>
+            <Text style={styles.getStartedText}>Folder: {folder}</Text>
+            <Text style={styles.getStartedText}>From: {sent_from}</Text>
+            <Text style={styles.getStartedText}>To: {sent_to}</Text>
+            <Text style={styles.getStartedText}>To: {date}</Text>
+            {plain ? (
+              <Text style={styles.getStartedText}>{plain}</Text>
+            ) : (
+              <HTMLView value={html} />
+            )}
           </View>
         </ScrollView>
       </View>

@@ -44,39 +44,34 @@ export default class InboxScreen extends React.Component {
     title: "Inbox"
   };
 
-  // WholeNews() {
-  //   return this.state.emails.map(function(e, i) {
-  //     return (
-  //       <View key={i}>
-  //         <Text>{e.name}</Text>
-  //       </View>
-  //     );
-  //   });
-  // }
   render() {
     const { navigate } = this.props.navigation;
 
-    // const renObjData = this.state.emails.map(function(email, id) {
-    //   return <Text key={id}>{email.name}</Text>;
-    // });
-
     return (
       <View style={styles.container}>
-        <Button
-          title="Go Example Email Screen"
-          onPress={() => navigate("Email", { name: "Jane" })}
-        />
-
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
         >
           <View style={styles.getStartedContainer}>
-            {/* {this.WholeNews()} */}
             {this.state.emails.map(function(e, i) {
               return (
                 <View key={i}>
-                  <Text>{e.subject}</Text>
+                  <Button
+                    title={e.subject}
+                    onPress={() =>
+                      navigate("Email", {
+                        message_id: e.message_id,
+                        subject: e.subject,
+                        folder: e.folder,
+                        sent_from: e.sent_from,
+                        sent_to: e.sent_to,
+                        date: e.date,
+                        plain: e.plain,
+                        html: e.html
+                      })
+                    }
+                  />
                 </View>
               );
             })}
