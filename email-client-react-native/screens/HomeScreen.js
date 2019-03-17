@@ -124,7 +124,7 @@
 //     textAlign: "center"
 //   },
 //   contentContainer: {
-//     paddingTop: 30
+//     paddingTop: 10
 //   },
 //   welcomeContainer: {
 //     alignItems: "center",

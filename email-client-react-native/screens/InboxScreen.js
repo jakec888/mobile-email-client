@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff"
   },
   contentContainer: {
-    paddingTop: 30
+    paddingTop: 10
   },
   getStartedContainer: {
     alignItems: "center",
