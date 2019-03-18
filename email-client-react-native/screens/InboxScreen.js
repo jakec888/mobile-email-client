@@ -1,5 +1,7 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
+// import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
+// import { StyleSheet, View, FlatList, Text } from "react-native";
+import { StyleSheet, View, Button, FlatList } from "react-native";
 
 export default class InboxScreen extends React.Component {
   constructor(props) {
@@ -49,6 +51,30 @@ export default class InboxScreen extends React.Component {
 
     return (
       <View style={styles.container}>
+        <FlatList
+          data={this.state.emails}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View key={item.message_id}>
+              <Button
+                title={item.subject}
+                onPress={() =>
+                  navigate("Email", {
+                    message_id: item.message_id,
+                    subject: item.subject,
+                    folder: item.folder,
+                    sent_from: item.sent_from,
+                    sent_to: item.sent_to,
+                    date: item.date,
+                    plain: item.plain,
+                    html: item.html
+                  })
+                }
+              />
+            </View>
+          )}
+        />
+        {/* 
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
@@ -118,7 +144,7 @@ export default class InboxScreen extends React.Component {
             <Text style={styles.getStartedText}>This Is The Inbox</Text>
             <Text style={styles.getStartedText}>This Is The Inbox</Text>
           </View>
-        </ScrollView>
+        </ScrollView> */}
       </View>
     );
   }
@@ -141,5 +167,10 @@ const styles = StyleSheet.create({
     color: "rgba(96,100,109, 1)",
     lineHeight: 24,
     textAlign: "center"
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44
   }
 });
