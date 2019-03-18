@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, View, FlatList, TouchableOpacity, Text } from "react-native";
 
+import moment from "moment";
+
 export default class InboxScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -69,10 +71,20 @@ export default class InboxScreen extends React.Component {
                 })
               }
             >
-              <Text style={styles.emailSubject}>{item.subject}</Text>
-              <Text style={styles.emailText}>
-                {item.plain.substring(0, 55) + "..."}
-              </Text>
+              <View style={styles.emailContainer}>
+                <View style={styles.emailMain}>
+                  <Text style={styles.emailSubject}>{item.subject}</Text>
+                  <Text style={styles.emailText}>
+                    {item.plain.substring(0, 55) + "..."}
+                  </Text>
+                </View>
+                <View style={styles.emailDate}>
+                  <Text style={styles.emailSubject}>
+                    {moment(item.date).format("MMM")}
+                  </Text>
+                  <Text style={styles.emailText}>{moment(item.date).format("Do")}</Text>
+                </View>
+              </View>
             </TouchableOpacity>
           )}
         />
@@ -86,6 +98,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff"
   },
+  emailContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  emailMain: {
+    flexDirection: "column"
+  },
+  emailDate: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+  },
   emailSubject: {
     fontSize: 21,
     fontWeight: "bold",
@@ -95,6 +119,7 @@ const styles = StyleSheet.create({
   },
   emailText: {
     fontSize: 13,
+    fontWeight: "bold",
     color: "#2f95dc",
     lineHeight: 21,
     textAlign: "left"
