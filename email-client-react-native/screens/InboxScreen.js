@@ -1,7 +1,5 @@
 import React from "react";
-// import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
-// import { StyleSheet, View, FlatList, Text } from "react-native";
-import { StyleSheet, View, Button, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, TouchableOpacity, Text } from "react-native";
 
 export default class InboxScreen extends React.Component {
   constructor(props) {
@@ -55,96 +53,29 @@ export default class InboxScreen extends React.Component {
           data={this.state.emails}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
-            <View key={item.message_id}>
-              <Button
-                title={item.subject}
-                onPress={() =>
-                  navigate("Email", {
-                    message_id: item.message_id,
-                    subject: item.subject,
-                    folder: item.folder,
-                    sent_from: item.sent_from,
-                    sent_to: item.sent_to,
-                    date: item.date,
-                    plain: item.plain,
-                    html: item.html
-                  })
-                }
-              />
-            </View>
+            <TouchableOpacity
+              style={styles.touchableEmail}
+              key={item.message_id}
+              onPress={() =>
+                navigate("Email", {
+                  message_id: item.message_id,
+                  subject: item.subject,
+                  folder: item.folder,
+                  sent_from: item.sent_from,
+                  sent_to: item.sent_to,
+                  date: item.date,
+                  plain: item.plain,
+                  html: item.html
+                })
+              }
+            >
+              <Text style={styles.emailSubject}>{item.subject}</Text>
+              <Text style={styles.emailText}>
+                {item.plain.substring(0, 55) + "..."}
+              </Text>
+            </TouchableOpacity>
           )}
         />
-        {/* 
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-        >
-          <View style={styles.getStartedContainer}>
-            {this.state.emails.map(function(e, i) {
-              return (
-                <View key={i}>
-                  <Button
-                    title={e.subject}
-                    onPress={() =>
-                      navigate("Email", {
-                        message_id: e.message_id,
-                        subject: e.subject,
-                        folder: e.folder,
-                        sent_from: e.sent_from,
-                        sent_to: e.sent_to,
-                        date: e.date,
-                        plain: e.plain,
-                        html: e.html
-                      })
-                    }
-                  />
-                </View>
-              );
-            })}
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-            <Text style={styles.getStartedText}>This Is The Inbox</Text>
-          </View>
-        </ScrollView> */}
       </View>
     );
   }
@@ -155,22 +86,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff"
   },
-  contentContainer: {
-    paddingTop: 10
+  emailSubject: {
+    fontSize: 21,
+    fontWeight: "bold",
+    color: "#2f95dc",
+    lineHeight: 21,
+    textAlign: "left"
   },
-  getStartedContainer: {
-    alignItems: "center",
-    marginHorizontal: 50
+  emailText: {
+    fontSize: 13,
+    color: "#2f95dc",
+    lineHeight: 21,
+    textAlign: "left"
   },
-  getStartedText: {
-    fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    lineHeight: 24,
-    textAlign: "center"
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44
+  touchableEmail: {
+    backgroundColor: "#DDDDDD",
+    padding: 10
   }
 });
