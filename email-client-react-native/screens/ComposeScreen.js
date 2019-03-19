@@ -1,6 +1,6 @@
 import React from "react";
-import { ScrollView, StyleSheet, View, Text, TextInput } from "react-native";
-// TextInput
+import { ScrollView, StyleSheet, View, Text, TextInput, Button } from "react-native";
+
 export default class ComposeScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -16,10 +16,26 @@ export default class ComposeScreen extends React.Component {
     title: "Compose Email"
   };
 
+  sendEmail = () => {
+    console.log("Send Email");
+  };
+
   render() {
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.inputContainer}>
+        <View style={styles.buttonContainer}>
+          <Button
+            onPress={this.sendEmail}
+            title="Delete"
+            accessibilityLabel="Learn more about this purple button"
+          />
+          <Button
+            onPress={this.sendEmail}
+            title="Send Email"
+            accessibilityLabel="Learn more about this purple button"
+          />
+        </View>
+        <View style={styles.fromContainer}>
           <Text style={styles.inputText}>From: {this.state.from}</Text>
         </View>
         <View style={styles.toContainer}>
@@ -40,7 +56,10 @@ export default class ComposeScreen extends React.Component {
         </View>
         <View style={styles.messageContainer}>
           <TextInput
+            placeholder="Compose Email"
             style={styles.messageInput}
+            multiline={true}
+            numberOfLines={21}
             onChangeText={text => this.setState({ message: text })}
             value={this.state.message}
           />
@@ -55,10 +74,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff"
   },
-  inputContainer: {
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  fromContainer: {
+    marginTop: 5,
     flexDirection: "row",
     justifyContent: "space-between",
-    borderColor: "green",
+    borderTopColor: "#fff",
+    borderLeftColor: "#fff",
+    borderRightColor: "#fff",
+    borderBottomColor: "#DDDDDD",
     borderWidth: 1,
     padding: 5
   },
@@ -69,10 +96,13 @@ const styles = StyleSheet.create({
     textAlign: "left"
   },
   toContainer: {
-    padding: 5,
     flexDirection: "row",
-    borderColor: "green",
-    borderWidth: 1
+    borderTopColor: "#fff",
+    borderLeftColor: "#fff",
+    borderRightColor: "#fff",
+    borderBottomColor: "#DDDDDD",
+    borderWidth: 1,
+    padding: 5
   },
   toTitle: {
     fontSize: 21,
@@ -84,10 +114,13 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   subjectContainer: {
-    padding: 5,
     flexDirection: "row",
-    borderColor: "green",
-    borderWidth: 1
+    borderTopColor: "#fff",
+    borderLeftColor: "#fff",
+    borderRightColor: "#fff",
+    borderBottomColor: "#DDDDDD",
+    borderWidth: 1,
+    padding: 5
   },
   subjectTitle: {
     fontSize: 21,
@@ -99,19 +132,20 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   messageContainer: {
+    borderWidth: 1,
     padding: 5,
     flexDirection: "row",
-    borderColor: "green",
-    borderWidth: 1
-  },
-  messageTitle: {
-    fontSize: 21,
-    color: "#2f95dc"
+    height: "100%"
   },
   messageInput: {
     fontSize: 21,
     color: "#2f95dc",
     width: "100%",
-    height: "80%"
+    height: "100  %"
+  },
+  sendButtonContainer: {
+    color: "#841584",
+    borderColor: "black",
+    backgroundColor: "red"
   }
 });
