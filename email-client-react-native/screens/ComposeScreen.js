@@ -1,5 +1,15 @@
 import React from "react";
-import { ScrollView, StyleSheet, View, Text, TextInput, Button } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Button,
+  Platform
+} from "react-native";
+
+import { Icon } from "expo";
 
 export default class ComposeScreen extends React.Component {
   constructor(props) {
@@ -29,10 +39,20 @@ export default class ComposeScreen extends React.Component {
             title="Delete"
             accessibilityLabel="Learn more about this purple button"
           />
+          <Icon.Ionicons
+            name={Platform.OS === "ios" ? "ios-trash" : "md-trash"}
+            color="#2f95dc"
+            size={26}
+          />
           <Button
             onPress={this.sendEmail}
             title="Send Email"
             accessibilityLabel="Learn more about this purple button"
+          />
+          <Icon.Ionicons
+            name={Platform.OS === "ios" ? "ios-send" : "md-send"}
+            color="#2f95dc"
+            size={26}
           />
         </View>
         <View style={styles.fromContainer}>
@@ -144,8 +164,6 @@ const styles = StyleSheet.create({
     height: "100  %"
   },
   sendButtonContainer: {
-    color: "#841584",
-    borderColor: "black",
-    backgroundColor: "red"
+    color: "#841584"
   }
 });
