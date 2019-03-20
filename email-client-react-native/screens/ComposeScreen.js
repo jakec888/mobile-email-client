@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   Button,
+  TouchableHighlight,
   Platform
 } from "react-native";
 
@@ -34,7 +35,18 @@ export default class ComposeScreen extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.buttonContainer}>
-          <Button
+          <TouchableHighlight
+            onPress={this.sendEmail}
+            style={styles.trash}
+            underlayColor="#dddd"
+          >
+            <Icon.Ionicons
+              name={Platform.OS === "ios" ? "ios-trash" : "md-trash"}
+              color="#2f95dc"
+              size={26}
+            />
+          </TouchableHighlight>
+          {/* <Button
             onPress={this.sendEmail}
             title="Delete"
             accessibilityLabel="Learn more about this purple button"
@@ -53,7 +65,18 @@ export default class ComposeScreen extends React.Component {
             name={Platform.OS === "ios" ? "ios-send" : "md-send"}
             color="#2f95dc"
             size={26}
-          />
+          /> */}
+          <TouchableHighlight
+            onPress={this.sendEmail}
+            style={styles.trash}
+            underlayColor="#dddd"
+          >
+            <Icon.Ionicons
+              name={Platform.OS === "ios" ? "ios-send" : "md-send"}
+              color="#2f95dc"
+              size={26}
+            />
+          </TouchableHighlight>
         </View>
         <View style={styles.fromContainer}>
           <Text style={styles.inputText}>From: {this.state.from}</Text>
@@ -95,8 +118,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff"
   },
   buttonContainer: {
+    padding: 5,
     flexDirection: "row",
     justifyContent: "space-between"
+  },
+  trash: {
+    alignItems: "center",
+    backgroundColor: "#fff",
+    padding: 10
   },
   fromContainer: {
     marginTop: 5,
@@ -107,7 +136,9 @@ const styles = StyleSheet.create({
     borderRightColor: "#fff",
     borderBottomColor: "#DDDDDD",
     borderWidth: 1,
-    padding: 5
+    paddingLeft: 5,
+    paddingBottom: 10,
+    paddingTop: 10
   },
   inputText: {
     fontSize: 21,
@@ -122,7 +153,9 @@ const styles = StyleSheet.create({
     borderRightColor: "#fff",
     borderBottomColor: "#DDDDDD",
     borderWidth: 1,
-    padding: 5
+    paddingLeft: 5,
+    paddingBottom: 10,
+    paddingTop: 10
   },
   toTitle: {
     fontSize: 21,
@@ -140,7 +173,9 @@ const styles = StyleSheet.create({
     borderRightColor: "#fff",
     borderBottomColor: "#DDDDDD",
     borderWidth: 1,
-    padding: 5
+    paddingLeft: 5,
+    paddingBottom: 10,
+    paddingTop: 10
   },
   subjectTitle: {
     fontSize: 21,
@@ -152,7 +187,6 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   messageContainer: {
-    borderWidth: 1,
     padding: 5,
     flexDirection: "row",
     height: "100%"
@@ -161,7 +195,7 @@ const styles = StyleSheet.create({
     fontSize: 21,
     color: "#2f95dc",
     width: "100%",
-    height: "100  %"
+    height: "100%"
   },
   sendButtonContainer: {
     color: "#841584"
