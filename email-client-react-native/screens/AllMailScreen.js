@@ -1,5 +1,7 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View, FlatList, TouchableOpacity, Text } from "react-native";
+
+import moment from "moment";
 
 export default class AllMailScreen extends React.Component {
   constructor(props) {
@@ -45,57 +47,48 @@ export default class AllMailScreen extends React.Component {
   };
 
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
       <View style={styles.container}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-        >
-          <View style={styles.getStartedContainer}>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-            <Text style={styles.getStartedText}>This Is The All Mail</Text>
-          </View>
-        </ScrollView>
+        <FlatList
+          data={this.state.emails}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.touchableEmail}
+              key={item.message_id}
+              onPress={() =>
+                navigate("Email", {
+                  message_id: item.message_id,
+                  subject: item.subject,
+                  folder: item.folder,
+                  sent_from: item.sent_from,
+                  sent_to: item.sent_to,
+                  date: item.date,
+                  plain: item.plain,
+                  html: item.html
+                })
+              }
+            >
+              <View style={styles.emailContainer}>
+                <View style={styles.emailMain}>
+                  <Text style={styles.emailFolder}>{item.folder.toUpperCase()}</Text>
+                  <Text style={styles.emailSubject}>{item.subject}</Text>
+                  <Text style={styles.emailText}>
+                    {item.plain.substring(0, 55) + "..."}
+                  </Text>
+                </View>
+                <View style={styles.emailDate}>
+                  <Text style={styles.emailSubject}>
+                    {moment(item.date).format("MMM")}
+                  </Text>
+                  <Text style={styles.emailText}>{moment(item.date).format("Do")}</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
       </View>
     );
   }
@@ -106,17 +99,41 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff"
   },
-  contentContainer: {
-    paddingTop: 10
+  emailContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
-  getStartedContainer: {
-    alignItems: "center",
-    marginHorizontal: 50
+  emailMain: {
+    flexDirection: "column"
   },
-  getStartedText: {
-    fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    lineHeight: 24,
-    textAlign: "center"
+  emailDate: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  emailFolder: {
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "#2f95dc",
+    lineHeight: 21,
+    textAlign: "left"
+  },
+  emailSubject: {
+    fontSize: 21,
+    fontWeight: "bold",
+    color: "#2f95dc",
+    lineHeight: 21,
+    textAlign: "left"
+  },
+  emailText: {
+    fontSize: 13,
+    fontWeight: "bold",
+    color: "#2f95dc",
+    lineHeight: 21,
+    textAlign: "left"
+  },
+  touchableEmail: {
+    backgroundColor: "#f8f8f8",
+    padding: 10
   }
 });
