@@ -5,9 +5,9 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   TouchableHighlight,
-  Platform
+  Platform,
+  Alert
 } from "react-native";
 
 import { Icon } from "expo";
@@ -28,7 +28,47 @@ export default class ComposeScreen extends React.Component {
   };
 
   sendEmail = () => {
-    console.log("Send Email");
+    Alert.alert(
+      "Send Email",
+      "Are you sure you want to send?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "Send",
+          onPress: () => {
+            console.log("Sending...");
+            this.setState({ to: "", subject: "", message: "" });
+          }
+        }
+      ],
+      { cancelable: false }
+    );
+  };
+
+  deleteEmail = () => {
+    Alert.alert(
+      "Delete Email",
+      "Are you sure you want to delete?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            console.log("OK Pressed");
+            this.setState({ to: "", subject: "", message: "" });
+          }
+        }
+      ],
+      { cancelable: false }
+    );
   };
 
   render() {
@@ -36,7 +76,7 @@ export default class ComposeScreen extends React.Component {
       <ScrollView style={styles.container}>
         <View style={styles.buttonContainer}>
           <TouchableHighlight
-            onPress={this.sendEmail}
+            onPress={this.deleteEmail}
             style={styles.trash}
             underlayColor="#dddd"
           >
@@ -46,26 +86,6 @@ export default class ComposeScreen extends React.Component {
               size={26}
             />
           </TouchableHighlight>
-          {/* <Button
-            onPress={this.sendEmail}
-            title="Delete"
-            accessibilityLabel="Learn more about this purple button"
-          />
-          <Icon.Ionicons
-            name={Platform.OS === "ios" ? "ios-trash" : "md-trash"}
-            color="#2f95dc"
-            size={26}
-          />
-          <Button
-            onPress={this.sendEmail}
-            title="Send Email"
-            accessibilityLabel="Learn more about this purple button"
-          />
-          <Icon.Ionicons
-            name={Platform.OS === "ios" ? "ios-send" : "md-send"}
-            color="#2f95dc"
-            size={26}
-          /> */}
           <TouchableHighlight
             onPress={this.sendEmail}
             style={styles.trash}
@@ -196,8 +216,5 @@ const styles = StyleSheet.create({
     color: "#2f95dc",
     width: "100%",
     height: "100%"
-  },
-  sendButtonContainer: {
-    color: "#841584"
   }
 });

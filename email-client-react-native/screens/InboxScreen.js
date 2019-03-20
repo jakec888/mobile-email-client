@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     textAlign: "left"
   },
   touchableEmail: {
-    backgroundColor: "#DDDDDD",
+    backgroundColor: "#f8f8f8",
     padding: 10
   }
 });
