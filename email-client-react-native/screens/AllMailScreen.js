@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   emailFolder: {
     fontSize: 15,
     fontWeight: "bold",
-    color: "#2f95dc",
+    color: "#a9a9a9",
     lineHeight: 21,
     textAlign: "left"
   },
