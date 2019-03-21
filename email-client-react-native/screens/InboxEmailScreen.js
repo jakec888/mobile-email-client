@@ -5,7 +5,9 @@ import {
   Text,
   View,
   TouchableHighlight,
-  Platform
+  Platform,
+  TextInput,
+  Alert
 } from "react-native";
 import { Icon } from "expo";
 import HTMLView from "react-native-htmlview";
@@ -24,7 +26,11 @@ export default class InboxEmailScreen extends React.Component {
       sent_to: "",
       date: "",
       plain: "",
-      html: ""
+      html: "",
+      replyFrom: "jaconjcondes@gmail.com",
+      replyTo: "",
+      replySubject: "",
+      replyMessage: ""
     };
   }
 
@@ -63,9 +69,38 @@ export default class InboxEmailScreen extends React.Component {
   };
 
   replyBack = () => {
+    console.log("Replying");
+
     this.setState({
       replying: !this.state.replying
     });
+  };
+
+  sendEmail = () => {
+    Alert.alert(
+      "Send Email",
+      "Are you sure you want to send?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "Send",
+          onPress: () => {
+            console.log("Sending...");
+            this.setState({
+              replying: false,
+              replyTo: "",
+              replySubject: "",
+              replyMessage: ""
+            });
+          }
+        }
+      ],
+      { cancelable: false }
+    );
   };
 
   render() {
@@ -131,7 +166,55 @@ export default class InboxEmailScreen extends React.Component {
               )}
             </TouchableHighlight>
           </View>
+          {this.state.replying ? (
+            <View style={styles.replySend}>
+              <TouchableHighlight
+                onPress={this.sendEmail}
+                style={styles.trash}
+                underlayColor="#dddd"
+              >
+                <Icon.Ionicons
+                  name={Platform.OS === "ios" ? "ios-send" : "md-send"}
+                  color="#2f95dc"
+                  size={26}
+                />
+              </TouchableHighlight>
+            </View>
+          ) : null}
         </View>
+        {this.state.replying ? (
+          <View style={styles.replyContainer}>
+            <View style={styles.fromContainer}>
+              <Text style={styles.inputText}>From: {this.state.replyFrom}</Text>
+            </View>
+            <View style={styles.toContainer}>
+              <Text style={styles.toTitle}>To: </Text>
+              <TextInput
+                style={styles.toInput}
+                onChangeText={text => this.setState({ replyTo: text })}
+                value={this.state.replyTo}
+              />
+            </View>
+            <View style={styles.subjectContainer}>
+              <Text style={styles.subjectTitle}>Subject: </Text>
+              <TextInput
+                style={styles.subjectInput}
+                onChangeText={text => this.setState({ replySubject: text })}
+                value={this.state.replySubject}
+              />
+            </View>
+            <View style={styles.messageContainer}>
+              <TextInput
+                placeholder="Compose Email"
+                style={styles.messageInput}
+                multiline={true}
+                numberOfLines={21}
+                onChangeText={text => this.setState({ replyMessage: text })}
+                value={this.state.replyMessage}
+              />
+            </View>
+          </View>
+        ) : null}
       </ScrollView>
     );
   }
@@ -159,6 +242,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "stretch"
   },
+  replySend: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "stretch"
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff"
@@ -173,5 +262,87 @@ const styles = StyleSheet.create({
   message: {
     fontSize: 34,
     color: "#2f95dc"
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff"
+  },
+  buttonContainer: {
+    padding: 5,
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  trash: {
+    alignItems: "center",
+    backgroundColor: "#fff"
+  },
+  fromContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderTopColor: "#fff",
+    borderLeftColor: "#fff",
+    borderRightColor: "#fff",
+    borderBottomColor: "#DDDDDD",
+    borderWidth: 1,
+    paddingLeft: 5,
+    paddingBottom: 10,
+    paddingTop: 10
+  },
+  inputText: {
+    fontSize: 21,
+    color: "#2f95dc",
+    lineHeight: 21,
+    textAlign: "left"
+  },
+  toContainer: {
+    flexDirection: "row",
+    borderTopColor: "#fff",
+    borderLeftColor: "#fff",
+    borderRightColor: "#fff",
+    borderBottomColor: "#DDDDDD",
+    borderWidth: 1,
+    paddingLeft: 5,
+    paddingBottom: 10,
+    paddingTop: 10
+  },
+  toTitle: {
+    fontSize: 21,
+    color: "#2f95dc"
+  },
+  toInput: {
+    fontSize: 21,
+    color: "#2f95dc",
+    width: "100%"
+  },
+  subjectContainer: {
+    flexDirection: "row",
+    borderTopColor: "#fff",
+    borderLeftColor: "#fff",
+    borderRightColor: "#fff",
+    borderBottomColor: "#DDDDDD",
+    borderWidth: 1,
+    paddingLeft: 5,
+    paddingBottom: 10,
+    paddingTop: 10
+  },
+  subjectTitle: {
+    fontSize: 21,
+    color: "#2f95dc"
+  },
+  subjectInput: {
+    fontSize: 21,
+    color: "#2f95dc",
+    width: "100%"
+  },
+  messageContainer: {
+    padding: 5,
+    flexDirection: "row",
+    height: "100%"
+  },
+  messageInput: {
+    fontSize: 21,
+    color: "#2f95dc",
+    width: "100%",
+    height: "100%"
   }
 });
