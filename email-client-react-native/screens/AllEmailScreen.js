@@ -67,6 +67,24 @@ export default class AllEmailScreen extends React.Component {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
       >
+        {this.state.info ? (
+          <View>
+            <Text style={styles.info}>From: {this.state.sent_from}</Text>
+            <Text style={styles.info}>To: {this.state.sent_to}</Text>
+            <Text style={styles.info}>
+              Date: {moment(this.state.date).format("LLLL")}
+            </Text>
+            <Text style={styles.info}>Folder: {this.state.folder.toUpperCase()}</Text>
+          </View>
+        ) : (
+          <View>
+            {this.state.html ? (
+              <HTMLView value={this.state.html} stylesheet={styles} />
+            ) : (
+              <Text style={styles.message}>{this.state.plain}</Text>
+            )}
+          </View>
+        )}
         <View style={styles.infoButton}>
           <TouchableHighlight onPress={this.getInfo} underlayColor="#dddd">
             {!this.state.info ? (
@@ -92,24 +110,6 @@ export default class AllEmailScreen extends React.Component {
             )}
           </TouchableHighlight>
         </View>
-        {this.state.info ? (
-          <View>
-            <Text style={styles.info}>From: {this.state.sent_from}</Text>
-            <Text style={styles.info}>To: {this.state.sent_to}</Text>
-            <Text style={styles.info}>
-              Date: {moment(this.state.date).format("LLLL")}
-            </Text>
-            <Text style={styles.info}>Folder: {this.state.folder}</Text>
-          </View>
-        ) : (
-          <View>
-            {this.state.html ? (
-              <HTMLView value={this.state.html} stylesheet={styles} />
-            ) : (
-              <Text style={styles.message}>{this.state.plain}</Text>
-            )}
-          </View>
-        )}
       </ScrollView>
     );
   }
@@ -123,7 +123,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "stretch"
+    alignItems: "stretch",
+    margin: 10
   },
   container: {
     flex: 1,

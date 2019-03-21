@@ -16,6 +16,7 @@ export default class InboxEmailScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      replying: false,
       info: false,
       subject: "",
       folder: "",
@@ -61,37 +62,18 @@ export default class InboxEmailScreen extends React.Component {
     });
   };
 
+  replyBack = () => {
+    this.setState({
+      replying: !this.state.replying
+    });
+  };
+
   render() {
     return (
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
       >
-        <View style={styles.infoButton}>
-          <TouchableHighlight onPress={this.getInfo} underlayColor="#dddd">
-            {!this.state.info ? (
-              <Icon.Ionicons
-                name={
-                  Platform.OS === "ios"
-                    ? "ios-information-circle-outline"
-                    : "md-information-circle-outline"
-                }
-                color="#2f95dc"
-                size={26}
-              />
-            ) : (
-              <Icon.Ionicons
-                name={
-                  Platform.OS === "ios"
-                    ? "ios-remove-circle-outline"
-                    : "md-remove-circle-outline"
-                }
-                color="red"
-                size={26}
-              />
-            )}
-          </TouchableHighlight>
-        </View>
         {this.state.info ? (
           <View>
             <Text style={styles.info}>From: {this.state.sent_from}</Text>
@@ -99,7 +81,7 @@ export default class InboxEmailScreen extends React.Component {
             <Text style={styles.info}>
               Date: {moment(this.state.date).format("LLLL")}
             </Text>
-            <Text style={styles.info}>Folder: {this.state.folder}</Text>
+            <Text style={styles.info}>Folder: {this.state.folder.toUpperCase()}</Text>
           </View>
         ) : (
           <View>
@@ -110,6 +92,46 @@ export default class InboxEmailScreen extends React.Component {
             )}
           </View>
         )}
+        <View style={styles.emailMenu}>
+          <View style={styles.infoButton}>
+            <TouchableHighlight onPress={this.getInfo} underlayColor="#dddd">
+              {!this.state.info ? (
+                <Icon.Ionicons
+                  name={
+                    Platform.OS === "ios"
+                      ? "ios-information-circle-outline"
+                      : "md-information-circle-outline"
+                  }
+                  color="#2f95dc"
+                  size={26}
+                />
+              ) : (
+                <Icon.Ionicons
+                  name={Platform.OS === "ios" ? "ios-close-circle" : "md-close-circle"}
+                  color="red"
+                  size={26}
+                />
+              )}
+            </TouchableHighlight>
+          </View>
+          <View style={styles.replyButton}>
+            <TouchableHighlight onPress={this.replyBack} underlayColor="#dddd">
+              {!this.state.replying ? (
+                <Icon.Ionicons
+                  name={Platform.OS === "ios" ? "ios-undo" : "md-undo"}
+                  color="#2f95dc"
+                  size={26}
+                />
+              ) : (
+                <Icon.Ionicons
+                  name={Platform.OS === "ios" ? "ios-trash" : "md-trash"}
+                  color="red"
+                  size={26}
+                />
+              )}
+            </TouchableHighlight>
+          </View>
+        </View>
       </ScrollView>
     );
   }
@@ -119,7 +141,19 @@ const styles = StyleSheet.create({
   info: {
     marginRight: 15
   },
+  emailMenu: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    margin: 10
+  },
   infoButton: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "stretch"
+  },
+  replyButton: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
