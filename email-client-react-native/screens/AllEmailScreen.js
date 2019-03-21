@@ -12,7 +12,7 @@ import HTMLView from "react-native-htmlview";
 
 import moment from "moment";
 
-export default class EmailScreen extends React.Component {
+export default class AllEmailScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

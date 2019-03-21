@@ -6,11 +6,12 @@ import TabBarIcon from "../components/TabBarIcon";
 import InboxScreen from "../screens/InboxScreen";
 import ComposeScreen from "../screens/ComposeScreen";
 import AllMailScreen from "../screens/AllMailScreen";
-import EmailScreen from "../screens/EmailScreen";
+import InboxEmailScreen from "../screens/InboxEmailScreen";
+import AllEmailScreen from "../screens/AllEmailScreen";
 
 const InboxStack = createStackNavigator({
   Inbox: InboxScreen,
-  Email: EmailScreen
+  InboxEmail: InboxEmailScreen
 });
 
 InboxStack.navigationOptions = {
@@ -38,7 +39,8 @@ ComposeStack.navigationOptions = {
 };
 
 const AllMailStack = createStackNavigator({
-  AllMail: AllMailScreen
+  AllMail: AllMailScreen,
+  AllEmailScreen: AllEmailScreen
 });
 
 AllMailStack.navigationOptions = {

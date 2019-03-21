@@ -59,7 +59,7 @@ export default class AllMailScreen extends React.Component {
               style={styles.touchableEmail}
               key={item.message_id}
               onPress={() =>
-                navigate("Email", {
+                navigate("AllEmailScreen", {
                   message_id: item.message_id,
                   subject: item.subject,
                   folder: item.folder,
