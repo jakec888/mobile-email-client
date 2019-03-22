@@ -2,6 +2,43 @@ import React from "react";
 import { StyleSheet, View, FlatList, TouchableOpacity, Text } from "react-native";
 import moment from "moment";
 
+// import { API, graphqlOperation } from "aws-amplify";
+// import * as queries from "../src/graphql/queries";
+// import * as mutations from "../src/graphql/mutations";
+
+// import { Auth } from "aws-amplify";
+
+// componentDidMount = async () => {
+//   await API.graphql(graphqlOperation(queries.listCalendarss, { limit: 300 }))
+//     .then(result => {
+//       this.setState({
+//         events: result.data.listCalendarss.items
+//       });
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+
+//   await API.graphql(
+//     graphqlOperation(mutations.updateCalendars, { input: calendarDetails })
+//   )
+//     .then(result => {
+//       this.setState({
+//         events: nextEvents
+//       });
+//       notification(
+//         "success",
+//         "Move event successfully",
+//         `${result.data.updateCalendars.title} was dropped onto ${
+//           result.data.updateCalendars.start
+//         }`
+//       );
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+// };
+
 export default class InboxScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -41,6 +78,40 @@ export default class InboxScreen extends React.Component {
       ]
     };
   }
+
+  // componentDidMount = async () => {
+  //   await Auth.currentUserInfo()
+  //     .then(result => {
+  //       console.log(result.id);
+  //     })
+  //     .catch(err => {
+  //       console.log("Error");
+  //     });
+
+  //   const emails = {
+  //     folder: "inbox",
+  //     sent_from: "Jake <jaconjcondes@gmail.com>",
+  //     sent_to: "Quinn <quin@gmail.com>",
+  //     subject: "This is the First Email",
+  //     date: "2019-03-14T21:18:23.198Z",
+  //     plain: "This is the first email body",
+  //     html: "<p>This is the first email body</p>"
+  //   };
+  //   await API.graphql(graphqlOperation(mutations.createEmail, { input: emails }))
+  //     .then(result => {
+  //       console.log(result);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  //   await API.graphql(graphqlOperation(queries.listEmails, { limit: 300 }))
+  //     .then(result => {
+  //       console.log(result);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
 
   static navigationOptions = {
     title: "Inbox"

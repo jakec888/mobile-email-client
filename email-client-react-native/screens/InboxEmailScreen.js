@@ -337,7 +337,8 @@ const styles = StyleSheet.create({
   messageContainer: {
     padding: 5,
     flexDirection: "row",
-    height: "100%"
+    height: "100%",
+    marginBottom: 100
   },
   messageInput: {
     fontSize: 21,
