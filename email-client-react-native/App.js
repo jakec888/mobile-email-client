@@ -3,11 +3,11 @@ import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { AppLoading, Asset, Font, Icon } from "expo";
 import AppNavigator from "./navigation/AppNavigator";
 
-import Amplify from "aws-amplify";
-import awsmobile from "./aws-exports";
+// import Amplify from "aws-amplify";
+// import awsmobile from "./aws-exports";
 // import { withAuthenticator } from "aws-amplify-react-native";
 
-Amplify.configure(awsmobile);
+// Amplify.configure(awsmobile);
 
 class App extends React.Component {
   state = {

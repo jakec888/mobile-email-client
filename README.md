@@ -1,5 +1,14 @@
 # Email-Client
 
+<p align="center">
+<img src="mobile-email-client.gif" />
+</p>
+
+##### Notes
+
+- unfinished
+- api not connected
+
 # Serverless-Flask
 
 ## API

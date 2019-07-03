@@ -7,7 +7,7 @@ custom:
     app: app.app
     packRequirements: false
   pythonRequirements:
-    dockerizePip: false
+    dockerizePip: true
 package:
   exclude:
     - node_modules/**

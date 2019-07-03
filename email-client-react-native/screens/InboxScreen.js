@@ -8,37 +8,6 @@ import moment from "moment";
 
 // import { Auth } from "aws-amplify";
 
-// componentDidMount = async () => {
-//   await API.graphql(graphqlOperation(queries.listCalendarss, { limit: 300 }))
-//     .then(result => {
-//       this.setState({
-//         events: result.data.listCalendarss.items
-//       });
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-
-//   await API.graphql(
-//     graphqlOperation(mutations.updateCalendars, { input: calendarDetails })
-//   )
-//     .then(result => {
-//       this.setState({
-//         events: nextEvents
-//       });
-//       notification(
-//         "success",
-//         "Move event successfully",
-//         `${result.data.updateCalendars.title} was dropped onto ${
-//           result.data.updateCalendars.start
-//         }`
-//       );
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// };
-
 export default class InboxScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -69,49 +38,43 @@ export default class InboxScreen extends React.Component {
           folder: "inbox",
           sent_from: "John <John@gmail.com>",
           sent_to: "Jake <jaconjcondes@gmail.com>",
-          subject: "This is the Third Email",
-          date: "2019-03-14T21:22:54.097Z",
-          plain: "This is the third email body",
-          html:
-            "<h1>HTML Ipsum Presents</h1><p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href='#'>Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p><h2>Header Level 2</h2><ol><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li><li>Aliquam tincidunt mauris eu risus.</li></ol><blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote><h3>Header Level 3</h3><ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li><li>Aliquam tincidunt mauris eu risus.</li></ul><pre><code>#header h1 a {display: block;width: 300px;height: 80px;}</code></pre><h1>HTML Ipsum Presents</h1><p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href='#'>Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p><h1>HTML Ipsum Presents</h1><p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href='#'>Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>"
+          subject: "HTML Ipsum Presents",
+          date: "2019-05-26T18:22:54.097Z",
+          plain: `Pellentesque habitant morbi tristique senectus et netus
+          
+          # HTML Ipsum Presents
+
+          **Pellentesque habitant morbi tristique** senectus et netus et malesuada fames
+          ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget,
+          tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. _Aenean
+          ultricies mi vitae est._ Mauris placerat eleifend leo. Quisque sit amet est et
+          sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, "commodo
+          vitae", ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt
+          condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec
+          non enim in turpis pulvinar facilisis. Ut felis.
+          
+          ## Header Level 2
+          
+            1. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+            2. Aliquam tincidunt mauris eu risus.
+          
+          > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras
+          in mi at felis aliquet congue. Ut a est eget ligula molestie gravida.
+          Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est
+          malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare
+          est.
+          
+          ### Header Level 3
+          
+            * Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+            * Aliquam tincidunt mauris eu risus.
+          
+          `,
+          html: `<h1>HTML Ipsum Presents</h1><p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p><h2>Header Level 2</h2><ol><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li><li>Aliquam tincidunt mauris eu risus.</li></ol><blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote><h3>Header Level 3</h3><ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li><li>Aliquam tincidunt mauris eu risus.</li></ul>`
         }
       ]
     };
   }
-
-  // componentDidMount = async () => {
-  //   await Auth.currentUserInfo()
-  //     .then(result => {
-  //       console.log(result.id);
-  //     })
-  //     .catch(err => {
-  //       console.log("Error");
-  //     });
-
-  //   const emails = {
-  //     folder: "inbox",
-  //     sent_from: "Jake <jaconjcondes@gmail.com>",
-  //     sent_to: "Quinn <quin@gmail.com>",
-  //     subject: "This is the First Email",
-  //     date: "2019-03-14T21:18:23.198Z",
-  //     plain: "This is the first email body",
-  //     html: "<p>This is the first email body</p>"
-  //   };
-  //   await API.graphql(graphqlOperation(mutations.createEmail, { input: emails }))
-  //     .then(result => {
-  //       console.log(result);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  //   await API.graphql(graphqlOperation(queries.listEmails, { limit: 300 }))
-  //     .then(result => {
-  //       console.log(result);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
 
   static navigationOptions = {
     title: "Inbox"
