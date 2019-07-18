@@ -123,3 +123,5 @@ config.py
 .vscode
 
 config.json
+
+# package-lock.json
