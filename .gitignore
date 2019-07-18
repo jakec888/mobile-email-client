@@ -122,6 +122,4 @@ config.py
 # VS Code
 .vscode
 
-config.json
-
-# package-lock.json
+package-lock.json
